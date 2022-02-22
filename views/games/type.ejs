@@ -1,0 +1,97 @@
+<%- include("../partials/header") %>
+<div class="container-full" id="header">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 text-center">
+            <h1 class="subpage-title">Aktualne gry na zoom dla typu: <%= param %></h1>
+            <form action="/games/search" method="get">
+                <div class="input-group mb-3">
+                    <input type="search" id="title" autocomplete="off" class="form-control" name="title" placeholder="Wpisz tytuł gry" aria-label="Wpisz tytuł ogłoszenia" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn button-small btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            <a class="links btn btn-success" href="/games/type/Łatwo dostępna">Łatwo dostępna</a>
+            <a class="links btn btn-danger" href="/games/type/Dość dziecinna">Dość dziecinna</a>
+            <a class="links btn btn-primary" href="/games/type/Nowa, nieśmigana">Nowa, nieśmigana</a>
+            <a class="links btn btn-warning" href="/games/type/Wymagająca przygotowania">Wymagajaca przygotowania</a>
+            
+        </div>
+    </div>
+</div>
+<div class="container">
+    
+    <br>
+        <% if(games.length === 0){ %>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-12 text-center">
+                    <div class="alert alert-info">
+                        Nie ma gier w typie: <%= param %>
+                    </div>
+                </div>
+            </div>
+            
+           
+        <% } else { %>
+            <div class="row">
+                <% games.forEach((game) => { %>
+                    <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 10px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title text-center"><%= game.name %></div>
+                                <details class="description" style="margin-top: 10px;">
+                                    <summary style="font-weight: 700">
+                                        Zobacz opis
+                                    </summary>
+                                    <p><%- game.description %></p>
+                                </details>
+                                <br>
+                                <p class="description">Preferowana liczba graczy: <strong><%= game.timesPlayed %></strong></p>
+                                <% if(game.type === "Dość dziecinna"){ %>
+                                    <p class="description text-danger">
+                                        <strong><%= game.type %></strong>
+                                    </p>
+                                <% } else if(game.type === "Nowa, nieśmigana"){ %>
+                                    <p class="description text-primary">
+                                        <strong><%= game.type %></strong>
+                                    </p>
+                                <% } else if(game.type === "Wymagająca przygotowania") { %>
+                                    <p class="description text-warning">
+                                        <strong><%= game.type %></strong>
+                                    </p>
+                                <% } else { %>
+                                    <p class="description text-success">
+                                        <strong><%= game.type %></strong>
+                                    </p>
+                                <% } %>
+                                <% if(game.link){ %>
+                                    <a href="<%= game.link %>" target="_blank" class="btn btn-primary button-small">Kliknij, by zagrać</a>
+                                <% } %>
+                               
+                                <% if(currentUser){ %>
+                                    <% if(currentUser.role === 'admin'){ %>
+                                        <a href="/games/<%= game._id %>/edit" class="btn btn-success">Edytuj</a>
+                                        <a href="/games/<%= game._id %>/delete" class="btn btn-danger">Usuń</a>
+                                    <% } %>
+                                   
+                                <% } %>
+                               
+                            </div>
+                        </div>
+                       
+                        
+                    </div>
+                   
+                <% }) %>
+                
+            </div>
+        <% } %>
+  
+</div>
+
+
+
+<script>
+    $("#games").addClass("active");
+</script>
+<%- include("../partials/footer") %>

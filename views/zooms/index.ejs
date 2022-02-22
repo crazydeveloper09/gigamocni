@@ -1,0 +1,63 @@
+<%- include("../partials/header") %>
+<div class="container-full" id="header">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 text-center">
+            <h1 class="subpage-title">Zoom</h1>
+            
+            <% if(currentUser){ %>
+                <% if(currentUser.role === 'admin'){ %>
+                    <a href="/zooms/new" class="btn btn-primary button-small">Dodaj zooma</a>
+                <% } %>
+                
+            <% } %>
+            
+        </div>
+    </div>
+</div>
+    <br>
+<div class="container">
+        <% if(zooms.length === 0){ %>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-12 text-center">
+                    <div class="alert alert-info">
+                        Nie dodaliśmy jeszcze informacji o zoomach
+                    </div>
+                </div>
+            </div>
+            
+           
+        <% } else { %>
+            <div class="row">
+                <% zooms.forEach((zoom) => { %>
+                    <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 10px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title text-center"><%= zoom.title %></div>
+                                <p class="description"><%= zoom.description %></p>
+                                <p class="description">Meeting ID: <strong><%= zoom.meetingID %></strong></p>
+                                <p class="description">Hasło: <strong><%= zoom.meetingPassword %></strong></p>
+                                <a href="/zoom/join?link=<%= zoom.link %>" target="_blank" class="btn btn-primary button-small">Kliknij, by dołączyć</a>
+                                <% if(currentUser){ %>
+                                    <% if(currentUser.role === 'admin'){ %>
+                                        <a href="/zoom/<%= zoom._id %>/edit" class="btn btn-success">Edytuj</a>
+                                        <a href="/zoom/<%= zoom._id %>/delete" class="btn btn-danger">Usuń</a>
+                                    <% } %>
+                                   
+                                <% } %>
+                               
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+                
+            </div>
+        <% } %>
+  
+</div>
+
+
+
+<script>
+    $("#zoom").addClass("active");
+</script>
+<%- include("../partials/footer") %>

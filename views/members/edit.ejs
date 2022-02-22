@@ -1,0 +1,128 @@
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 8%">
+            <div id="form1">
+                <a href="/members">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony z członkami
+                </a>
+                <h1 class="login">Edytuj konto <%= member.username %></h1>
+                <% if(error.length > 0){ %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                <% } %>
+                <% if(success.length > 0){ %>
+                    <div class="alert alert-success" role="alert">
+                        <%= success %>
+                    </div>
+                <% } %>
+                <form action="/members/<%= member._id %>?_method=PUT" method="post" id>
+                   
+                    <label for="username" class="username">
+                        Edytuj nazwę użytkownika
+                        
+                    </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fas fa-user"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="member[username]" id="username" value="<%= member.username %>" placeholder="Tu wpisz nazwę użytkownika" aria-label="Hasło" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="username" class="username">
+                        Edytuj imię
+                        
+                    </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fas fa-user-tag"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="member[name]" id="username" value="<%= member.name %>" placeholder="Tu wpisz swoje imię" aria-label="Hasło" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="username" class="username">
+                        Edytuj nazwisko
+                        
+                    </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fas fa-address-card"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="member[surname]" id="username" value="<%= member.surname %>" placeholder="Tu wpisz swoje nazwisko" aria-label="Nazwisko" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="username" class="username">
+                        Edytuj email
+                        
+                    </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fas fa-envelope"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="member[email]" id="username" value="<%= member.email %>" placeholder="Tu wpisz swój email" aria-label="Hasło" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="password" class="username">
+                        Edytuj nazwę facebooka
+                        
+                    </label>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fab fa-facebook"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="member[facebookLink]" id="password" value="<%= member.facebookLink %>" placeholder="Tu wpisz nazwę na Facebooka" aria-label="Hasło" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="password" class="username">
+                        Edytuj nazwę na insta
+                        
+                    </label>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fab fa-instagram"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="member[instagramLink]" id="password" value="<%= member.instagramLink %>" placeholder="Tu wpisz nazwę na Instagrama" aria-label="Hasło" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="password" class="username">
+                        Edytuj nazwę na snapie
+                        
+                    </label>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fab fa-snapchat"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="member[snapchatLink]" id="password" value="<%= member.snapchatLink %>" placeholder="Tu wpisz nazwę na Snapchata" aria-label="Hasło" aria-describedby="basic-addon1">
+                    </div>
+                    <label for="description" class="username">
+                        Edytuj opis swojej osoby
+                        
+                    </label>
+                    <textarea name="member[description]" placeholder="Opis swojej osoby" id="description" class="form-control"><%= member.description %></textarea>
+                   <br>
+                    <input type="submit" value="Edytuj konto" class="btn btn-primary button btn-golden">
+                   
+                </form>
+                
+            </div>
+           
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>

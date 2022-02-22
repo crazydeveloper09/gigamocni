@@ -1,0 +1,61 @@
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 16%">
+            <div id="form1">
+                <a href="/gigatv">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony z filmami
+                </a>
+                <h1 class="login">Dodaj film do GigaTV</h1>
+                <% if(error.length > 0){ %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                <% } %>
+                <% if(success.length > 0){ %>
+                    <div class="alert alert-success" role="alert">
+                        <%= success %>
+                    </div>
+                <% } %>
+                <form action="/gigatv" method="post">
+                   
+                    <label for="username" class="username">
+                        Podaj tytuł filmu
+                        
+                    </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fas fa-pencil-alt"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Odcinek premierowy" aria-label="Tytuł zooma" aria-describedby="basic-addon1" required>
+                    </div>
+                    <label for="name" class="username">
+                        Podaj link do youtube
+                        
+                    </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fab fa-youtube"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="youtubeLink" id="youtubeLink" placeholder="Link do YT" aria-label="Link" aria-describedby="basic-addon1" required>
+                    </div>
+                  
+                    
+                    <input type="submit" value="Dodaj film" class="btn btn-primary button btn-golden">
+                   
+                </form>
+               
+            </div>
+           
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>

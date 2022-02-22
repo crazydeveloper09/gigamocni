@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+
+<head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-JG86CDL98B"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-JG86CDL98B');
+    </script>
+    <title> <%= header %></title>
+  
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,700" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b2ec1cb26d.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-brown justify-content-center" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand logo" href="/">GigaMocni!</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border:none;">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto text-center">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="/events" id="events">Terminarz</a>
+                    </li>    
+                    
+                   
+                        
+                    <li class="nav-item">
+                        <a class="nav-link" href="/games" id="games">Gry</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/surveys" id="survey">Ankiety</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/gigatv" id="gigatv">GigaTV</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <a class="nav-link dropdown-toggle" href="#"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Informacje
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee">
+                                <a class="dropdown-item" href="/members" id="members">Członkowie</a>
+                                 <!-- <a class="dropdown-item" href="/announcements">Ogłoszenia</a> -->
+                                <a class="dropdown-item" href="https://docs.google.com/document/d/1IzGBvmwck9ukmIy3NlLIfIQDZbg8nriAgKaWLBemTtQ/edit?usp=drivesdk">Dodawanie osób </a>
+                                
+                            </div>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/zoom" id="zoom">Zoom</a>
+                    </li>
+                    <% if(currentUser){ %>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/members/logout">Wyloguj się</a>
+                        </li>
+                    <% } %>
+                </ul>
+            </div>	
+        </div>	    
+    </nav>

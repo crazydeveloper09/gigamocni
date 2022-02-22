@@ -1,0 +1,66 @@
+<%- include("../partials/header") %>
+
+<div class="container-full" id="header">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 text-center">
+            <h1 class="subpage-title">Wydarzenia</h1>
+            
+            <% if(currentUser){ %>
+                <% if(currentUser.role === 'admin'){ %>
+                    <a href="/events/new" class="btn btn-primary button-small">Dodaj wydarzenie</a>
+                <% } %>
+                
+            <% } %>
+            
+        </div>
+    </div>
+</div>
+    <br>
+<div class="container">
+        <% if(events.length === 0){ %>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-12 text-center">
+                    <div class="alert alert-info">
+                        Nie dodaliśmy jeszcze informacji o wydarzeniach
+                    </div>
+                </div>
+            </div>
+            
+           
+        <% } else { %>
+            <div class="row">
+                <% events.forEach((event) => { %>
+                    <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 10px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title text-center"><%= event.name %></div>
+                                <p class="description">
+                                    <%= event.description %> Odbędzie się ono <strong><%= event.date.toLocaleDateString('pl-PL') %></strong>
+                                     o godz. <strong><%= event.time %></strong>
+                                </p>
+                                <a href="/zoom/join?link=<%= event.zoom.link %>" target="_blank" class="btn btn-primary button-small">Kliknij, by dołączyć</a>
+                                <% if(currentUser){ %>
+                                    <% if(currentUser.role === 'admin'){ %>
+                                        <a href="/events/<%= event._id %>/edit" class="btn btn-success">Edytuj</a>
+                                        <a href="/events/<%= event._id %>/delete" class="btn btn-danger">Usuń</a>
+                                    <% } %>
+                                   
+                                <% } %>
+                               
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+                
+            </div>
+            
+        <% } %>
+  
+</div>
+
+
+
+<script>
+    $("#events").addClass("active");
+</script>
+<%- include("../partials/footer") %>

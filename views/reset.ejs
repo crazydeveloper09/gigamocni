@@ -1,0 +1,55 @@
+<%- include("./partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 18%">
+            <div id="form1">
+                <a href="/login">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony logowania
+                </a>
+                <h1 class="login">Resetowanie hasła GigaMocni</h1>
+                <% if(error.length > 0){ %>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+                <% } %>
+                <% if(success.length > 0){ %>
+                <div class="alert alert-success" role="alert">
+                    <%= success %>
+                </div>
+                <% } %>
+                <form action="/members/reset/<%= token %>" method="post">
+                    <p class="username">Wpisz nowe hasło</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </div>
+                        <input type="password" class="form-control" autocomplete="on" name="password" id="username"
+                            placeholder="Nowe hasło" aria-label="Nowe hasło"
+                            aria-describedby="basic-addon1">
+                    </div>
+                    <p class="username">Potwierdź nowe hasło</p>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </div>
+                        <input type="password" class="form-control" autocomplete="on" name="confirm" id="password"
+                            placeholder="Powtórz nowe hasło" aria-label="Powtórz nowe hasło"
+                            aria-describedby="basic-addon1">
+                    </div>
+                    <input type="submit" value="Zmień hasło" class="btn btn-primary button btn-golden">
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

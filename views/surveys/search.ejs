@@ -1,0 +1,79 @@
+<%- include("../partials/header") %>
+
+<div class="container-full" id="header">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 text-center">
+            <h1 class="subpage-title">Wyszukiwanie ankiet po parametrze <%= param %>: <%= surveys.length %> </h1>
+            <form action="/surveys/search" method="get">
+                <div class="input-group mb-3">
+                    <input type="search" id="title" autocomplete="off" value="<%= param %>" class="form-control" name="title" placeholder="Wpisz tytuł ankiety" aria-label="Wpisz tytuł ogłoszenia" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn button-small btn-primary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+            
+            <% if(currentUser){ %>
+                <% if(currentUser.role === 'admin'){ %>
+                    <a href="/surveys/new" class="btn btn-primary button-small">Dodaj ankietę</a>
+                <% } %>
+                
+            <% } %>
+            
+        </div>
+    </div>
+</div>
+    <br>
+    <div class="container">
+        <% if(surveys.length === 0){ %>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-12 text-center">
+                    <div class="alert alert-info">
+                        Nie znaleźliśmy ankiet po parametrze <%= param %>
+                    </div>
+                </div>
+            </div>
+            
+           
+        <% } else { %>
+            <div class="row">
+                <% surveys.forEach((survey) => { %>
+                    <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 10px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card-title text-center"><%= survey.name %></div>
+                                <p class="description"><%= survey.description %></p>
+                                <p class="description">Autor: <strong><%= survey.author.name %> <%= survey.author.surname %></strong></p>
+                                <% if(currentUser && currentUser.role === 'admin'){ %>
+                                    <div class="dropdown">
+                                        <a class="btn btn-primary button-small dropdown-toggle" href="#"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Modyfikacja
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee">
+                                            <a class="dropdown-item" href="/surveys/<%= survey._id %>/edit">Edytuj</a>
+                                            <a class="dropdown-item" href="/surveys/<%= survey._id %>/delete">Usuń</a>
+                                            <% if(survey.type === "checkbox"){ %>
+                                                <a class="dropdown-item" href="/surveys/<%= survey._id %>/options/new">Dodaj opcję</a>
+                                            <% } %>
+                                           
+                                        </div>
+                                    </div>
+                                <% } %>
+                                
+                                <a href="/surveys/<%= survey._id %>" class="btn btn-primary button-small">Zobacz ankietę</a>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+                
+            </div>
+        <% } %>
+  
+</div>
+
+
+
+<script>
+    $("#survey").addClass("active");
+</script>
+<%- include("../partials/footer") %>

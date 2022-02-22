@@ -1,0 +1,99 @@
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 6%">
+            <div id="form1">
+                <a href="/zoom">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony o grach
+                </a>
+                <h1 class="login">Edytuj grę <%= game.name %></h1>
+                <% if(error.length > 0){ %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                <% } %>
+                <% if(success.length > 0){ %>
+                    <div class="alert alert-success" role="alert">
+                        <%= success %>
+                    </div>
+                <% } %>
+                <form action="/games/<%= game._id %>?_method=PUT" method="post">
+                   
+                    <label for="username" class="username">
+                        Edytuj tytuł gry
+                        
+                    </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fas fa-pencil-alt"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="game[name]" id="title" value="<%= game.name %>" placeholder="Gartic Phone" aria-label="Tytuł gry" aria-describedby="basic-addon1" required>
+                    </div>
+                    <label for="name" class="username">
+                        Edytuj link do gry*
+                        
+                    </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fas fa-link"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="game[link]" id="link" value="<%= game.link %>" placeholder="Link do gry" aria-label="Link" aria-describedby="basic-addon1">
+                    </div>
+                    <p class="text-muted" style="font-size: 13px">*Zostaw pole puste, jeśli gra nie ma linka</p>
+                    <label for="email" class="username">
+                        Edytuj preferowaną liczbę graczy
+                        
+                    </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                              <i class="fas fa-hashtag"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" name="game[timesPlayed]" id="timesPlayed"  value="<%= game.timesPlayed %>" placeholder="6-8 graczy" aria-label="Preferowana liczba graczy" aria-describedby="basic-addon1" required>
+                    </div>  
+                   
+                    <label for="zoomSelect" class="username">
+                        Edytuj typ gry
+                        
+                    </label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="fas fa-user-circle"></i>
+                            </span>
+                        </div>
+                        <select name="game[type]" id="zoomSelect" class="form-control" required>
+                            <option><%= game.type %></option>
+                            <option>Dość dziecinna</option>
+                            <option>Nowa, nieśmigana</option>
+                            <option>Wymagająca przygotowania</option>
+                            <option>Łatwo dostępna</option>
+                        </select>
+                    </div>  
+                    
+                    <label for="description" class="username">
+                        Edytuj opis gry
+                        
+                    </label>
+                    <textarea required name="game[description]" placeholder="Opis gry" id="description" class="form-control"><%= game.description %></textarea>
+                   <br>
+                    
+                    <input type="submit" value="Edytuj grę" class="btn btn-primary button btn-golden">
+                   
+                </form>
+               
+            </div>
+           
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 6%">
+            <div id="form1">
+                <a href="/surveys">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony o ankietach
+                </a>
+                <h1 class="login">Podsumowanie ankiety <q><%= survey.name %></q></h1>
+                <p class="description">Liczba głosów: <strong><%= totalVotes %></strong></p>
+                <% if(survey.type === "checkbox"){ %>
+                    <% options.forEach((option) => { %>
+                        
+                        <p class="description" style="font-size: 22px;"><%= option.description %> - <%= option.numberOfAnswers %></p>
+                        <% if(currentUser && survey.author.username == currentUser.username){ %>
+                            <a href="/surveys/<%= survey._id %>/options/<%= option._id %>/edit">Edytuj</a>
+                            <a href="/surveys/<%= survey._id %>/options/<%= option._id %>/delete">Usuń</a>
+                        <% } %>
+                        
+                        <div class="progress">
+                            <span style="width: <%= (option.numberOfAnswers / totalVotes) * 100  %>%; 
+                                        background: <%= option.color %>;
+                                        font-size: 20px;
+                                        color: <%= option.color %>;
+                                        text-indent: -9999px">
+                                <%= (option.numberOfAnswers / totalVotes) * 100  %>%
+                            </span>
+                        </div>    
+                        
+                    <% }) %>
+                <% } else { %>
+                    <ul class="description">
+                        <% answers.forEach((answer) => { %>
+                            <li><%= answer.member.name %> - <strong><%= answer.description %></strong></li>
+                        <% }) %> 
+                    </ul>
+                <% } %>
+                <br>
+                <% if(currentUser && currentUser.role === 'admin'){ %>
+                    <a href="/surveys/<%= survey._id %>/reset" class="btn btn-secondary button">Resetuj wyniki</a>
+                <% } %>   
+                    
+            </div>
+           
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>

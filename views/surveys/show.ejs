@@ -1,0 +1,101 @@
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 6%">
+            <div id="form1">
+                <a href="/surveys">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony o ankietach
+                </a>
+                <h1 class="login"><%= survey.name %></h1>
+                <p class="description"><%= survey.description %></p>
+                <% if(error.length > 0){ %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                <% } %>
+                <% if(success.length > 0){ %>
+                    <div class="alert alert-success" role="alert">
+                        <%= success %>
+                    </div>
+                <% } %>
+                <form action="/surveys/<%= survey._id %>/vote" method="post">
+                    <% if(survey.type === "checkbox"){ %>
+                        <% options.forEach((option) => { %>
+                        
+                            <label class="radio">
+                                <input type="radio" name="option" value="<%= option._id %>">
+                                <div class="radioButton"></div>
+                                <p>
+                                    <%= option.description %>
+                                </p>
+                            </label>
+                            
+                            
+                            <br>
+                        <% }) %>
+                        <% if(survey.for === 'admin'){ %>
+                            <% if(currentUser && currentUser.role === "admin"){ %>
+                                <% if(options.length !== 0){ %>
+                                    <input type="submit" value="Zagłosuj" class="btn btn-primary button btn-golden">
+                                <% } %>
+                                
+                            <% } %>
+                            <span class="text-danger description">W tej ankiecie mogą wziąc udział tylko administratorzy</span>
+                        <% } else if(survey.for === "members") { %>
+                            <% if(currentUser){ %>
+                                <% if(options.length !== 0){ %>
+                                    <input type="submit" value="Zagłosuj" class="btn btn-primary button btn-golden">
+                                <% } %>
+                            <% } %>
+
+                        <% } else { %>
+                            <% if(options.length !== 0){ %>
+                                <input type="submit" value="Zagłosuj" class="btn btn-primary button btn-golden">
+                            <% } %>
+                        <% } %>
+                       
+                    <% } else { %>
+                        <label for="username" class="username">
+                            Wpisz odpowiedź
+                            
+                        </label>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">
+                                  <i class="fas fa-pencil-alt"></i>
+                                </span>
+                            </div>
+                            <textarea class="form-control" name="answer" id="description" placeholder="Odpowiedź na ankietę" aria-label="Odpowiedź na ankietę" aria-describedby="basic-addon1" required></textarea>
+                        </div>
+                        <% if(survey.for === 'admin'){ %>
+                            <% if(currentUser && currentUser.role === "admin"){ %>
+
+                                <input type="submit" value="Zagłosuj" class="btn btn-primary button btn-golden">
+                            <% } %>
+                            <span class="text-danger description">W tej ankiecie mogą wziąc udział tylko administratorzy</span>
+                        <% } else if(survey.for === "members") { %>
+                            <% if(currentUser){ %>
+                                <input type="submit" value="Zagłosuj" class="btn btn-primary button btn-golden">
+                            <% } %>
+                            <span class="text-danger description">W tej ankiecie mogą wziąc udział tylko członkowie</span>
+                        <% } else { %>
+                            <input type="submit" value="Zagłosuj" class="btn btn-primary button btn-golden">
+                        <% } %>
+                       
+                    <% } %>
+                   
+                    
+                    
+                   
+                </form>
+               <a href="/surveys/<%= survey._id %>/summary" class="btn btn-secondary button">Zobacz wyniki</a>
+            </div>
+           
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>

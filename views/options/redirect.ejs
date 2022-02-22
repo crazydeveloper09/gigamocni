@@ -1,0 +1,35 @@
+<%- include("../partials/headera") %>
+<div class="col-lg-6 col-md-12" id="form">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-12" style="margin-top: 6%">
+            <div id="form1">
+                <a href="/surveys">
+                    <i class="fas fa-arrow-left"></i>
+                    Wróć do strony o ankietach
+                </a>
+                <h1 class="login">Czy chcesz (bo nie wiem) dodać kolejną opcję do ankiety (to jest ważna decyzja - poważnie się zastanów)?</h1>
+                <% if(error.length > 0){ %>
+                    <div class="alert alert-danger" role="alert">
+                        <%= error %>
+                    </div>
+                <% } %>
+                <% if(success.length > 0){ %>
+                    <div class="alert alert-success" role="alert">
+                        <%= success %>
+                    </div>
+                <% } %>
+                
+                    
+                <a href="/surveys/<%= survey._id %>/options/new" class="btn btn-primary button btn-golden">Tak</a>
+                <a href="/surveys" class="btn btn-secondary button">Nie</a>
+               
+               
+            </div>
+           
+        </div>
+        
+    </div>
+</div>
+
+</body>
+</html>

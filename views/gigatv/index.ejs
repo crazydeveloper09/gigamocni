@@ -1,0 +1,61 @@
+<%- include("../partials/header") %>
+<div class="container-full" id="header">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 text-center">
+            <h1 class="subpage-title">GigaTV</h1>
+            
+            <% if(currentUser){ %>
+                <% if(currentUser.role === 'admin'){ %>
+                    <a href="/gigatv/new" class="btn btn-primary button-small">Dodaj wideo</a>
+                <% } %>
+                
+            <% } %>
+            
+        </div>
+    </div>
+</div>
+    <br>
+<div class="container">
+        <% if(videos.length === 0){ %>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-12 text-center">
+                    <div class="alert alert-info">
+                        Nie dodaliśmy jeszcze filmów w GigaTV
+                    </div>
+                </div>
+            </div>
+            
+           
+        <% } else { %>
+            <div class="row">
+                <% videos.forEach((video) => { %>
+                    <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 10px;">
+                        <div class="card">
+                            <iframe class="card-img-top" src="<%= video.youtubeLink %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen crossorigin></iframe>
+                            <div class="card-body">
+                                <div class="card-title text-center"><%= video.name %></div>
+                
+                                <% if(currentUser){ %>
+                                    <% if(currentUser.role === 'admin'){ %>
+                                        <a href="/gigatv/<%= video._id %>/edit" class="btn btn-success">Edytuj</a>
+                                        <a href="/gigatv/<%= video._id %>/delete" class="btn btn-danger">Usuń</a>
+                                    <% } %>
+                                   
+                                <% } %>
+                               
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+                
+            </div>
+        <% } %>
+  
+</div>
+
+
+
+<script>
+    $("#gigatv").addClass("active");
+</script>
+<%- include("../partials/footer") %>

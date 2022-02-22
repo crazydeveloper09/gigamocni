@@ -1,0 +1,95 @@
+<%- include("../partials/header") %>
+<div class="container-full" id="header">
+    <div class="row justify-content-center">
+        <div class="col-lg-7 text-center">
+            <h1 class="subpage-title">Członkowie</h1>
+            
+        </div>
+    </div>
+</div>
+    <br>
+<div class="container">
+        <% if(members.length === 0){ %>
+            <div class="row justify-content-center">
+                <div class="col-lg-6 col-md-12 text-center">
+                    <div class="alert alert-info">
+                        Nie dodaliśmy jeszcze informacji o członkach
+                    </div>
+                </div>
+            </div>
+            
+           
+        <% } else { %>
+            <div class="row">
+                <% members.forEach((member) => { %>
+                    <div class="col-lg-4 col-md-6 col-sm-12" style="margin-top: 10px;">
+                        <div class="card">
+                            <% if(member.profile){ %>
+                                <img src="<%= member.profile %>" alt="Zdjęcie profilowe" class="card-img-top">
+                            <% } %>
+                            <div class="card-body">
+                                
+                                <div class="card-title text-center"><%= member.name %> <%= member.surname %> - <%= member.username %></div>
+                                <% if(member.facebookLink){ %>
+                                    <a href="https://www.facebook.com/<%= member.facebookLink %>" target="_blank" class="fab fa-facebook icon fa-2x"></a>
+                                <% } %>
+                                <% if(member.instagramLink){ %>
+                                    <a href="https://www.instagram.com/<%= member.instagramLink %>" target="_blank" class="fab fa-instagram icon fa-2x"></a>
+                                <% } %>
+                                <% if(member.snapchatLink){ %>
+                                    <a href="https://www.snapchat.com/add/<%= member.snapchatLink %>" target="_blank" class="fab fa-snapchat icon fa-2x"></a>
+                                <% } %>
+                                
+                                <% if(member.description){ %>
+                                    <details class="description" style="margin-top: 10px;">
+                                        <summary style="font-weight: 700">
+                                            Zobacz opis
+                                        </summary>
+                                        <p><%- member.description %></p>
+                                    </details>
+                                   
+                                <% } %>
+                                <% if(member.username === currentUser.username){ %>
+                                    <div class="dropdown">
+                                        <a class="btn btn-primary button-small dropdown-toggle" href="#"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Modyfikacja
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee">
+                                            <a class="dropdown-item" href="/members/<%= member._id %>/edit">Edytuj</a>
+                                            <a class="dropdown-item" href="/members/<%= member._id %>/delete">Usuń</a>
+                                            <a class="dropdown-item" href="/members/<%= member._id %>/edit/profile">Zmień zdjęcie profilowe</a>
+                                        </div>
+                                    </div>
+                                <% } %>
+                                
+                                <% if(currentUser.role === 'admin') { %>
+                                    <div class="dropdown">
+                                        <a class="btn btn-primary button-small dropdown-toggle" href="#"  id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                           Administracja (<%= currentUser.role %>)
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="background: #eeeeee">
+                                            
+                                            <a class="dropdown-item" href="/members/<%= member._id %>/delete">Usuń</a>
+                                            <a class="dropdown-item" href="/members/<%= member._id %>/newRole">Zmień rolę</a>
+                                        </div>
+                                    </div>
+                                    
+                                <% } %>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+               
+               
+                <% }) %>
+                
+            </div>
+        <% } %>
+  
+</div>
+<script>
+    $("#members").addClass("active");
+</script>
+<%- include("../partials/footer") %>
+
