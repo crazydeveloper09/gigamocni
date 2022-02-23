@@ -334,8 +334,8 @@ router.put("/:member_id", isLoggedIn, (req, res) => {
         if(err){
             console.log(err)
         } else {
-            member.edited = Date.now();
-            member.save()
+            updatedmember.edited = Date.now();
+            updatedmember.save()
             res.redirect("/members")
         }
     })
